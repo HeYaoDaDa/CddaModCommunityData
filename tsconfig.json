@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "rootDir": "./src",
+        "outDir": "./dist"
+    },
+    "include": [
+        "./src/**/*"
+    ],
+}
