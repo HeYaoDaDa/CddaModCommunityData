@@ -22,7 +22,7 @@ jobs:
         env:
           APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
           APP_ID: ${{ vars.APP_ID }}
-        run: npx tsc && node dist/app.js && mkdir /tmp/GrcData && rm package*.json && rm tsconfig.json && cp ./*.json /tmp/GrcData
+        run: npx tsc && node dist/app.js && mkdir /tmp/GrcData && rm package*.json && rm tsconfig.json && cp *.json /tmp/GrcData
       
       - name: checkout self
         uses: actions/checkout@master
@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
       
       - name: prepare comit
-        run: cp -f /tmp/GrcData/*.json ./
+        run: cp -f /tmp/GrcData/*.json .
 
       - name: Commit & Push changes
         uses: actions-js/push@master
