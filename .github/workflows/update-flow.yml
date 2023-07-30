@@ -23,20 +23,21 @@ jobs:
           APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
           APP_ID: ${{ vars.APP_ID }}
         run: npx tsc && node dist/app.js
+
+      - name: copy result
+        run: mkdir /tmp/GrcData;rm package*.json;rm tsconfig.json;cp -f ./*.json /tmp/GrcData
       
       - name: checkout self
         uses: actions/checkout@master
         with:
-          path: 'self'
           persist-credentials: false
           fetch-depth: 0
       
       - name: prepare comit
-        run: rm package*.json;cp -f *.json ./self;cd self
+        run: cp -f /tmp/GrcData/*.json ./
 
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.REPO_TOKEN }}
           force: true
-          directory: './self'
